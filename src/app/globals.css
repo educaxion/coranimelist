@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+body {
+  background-color: #080714;
+  color: white;
+  font-family: var(--font-poppins);
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-plus-jakarta);
+  }
+}
+
+@theme {
+  --color-primary: #080714;
+  --color-secondary: #100E20;
+  --color-card: #171528;
+  --color-surface: #211E35;
+
+  --color-accent: #D62945;
+  --color-accent-hover: #F0445E;
+
+  --color-text: #F8F7FC;
+  --color-sub: #A5A2B5;
+
+  --color-border: #29263B;
+}
+
+@font-face {
+  font-family: 'modern-tokyo'; /* Nama bebas yang ingin kamu panggil */
+  src: url('/fonts/ModernTokyo.ttf') format('truetype'); /* Sesuaikan ekstensi file (.ttf / .woff2) */
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

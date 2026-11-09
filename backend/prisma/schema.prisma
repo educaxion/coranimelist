@@ -1,0 +1,176 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ======================================
+// ENUMS
+// ======================================
+
+enum WatchStatus {
+  WATCHING
+  COMPLETED
+  PLANNING
+  DROPPED
+}
+
+// ======================================
+// USER
+// ======================================
+
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+  username     String   @unique @db.VarChar(30)
+  email        String   @unique @db.VarChar(255)
+  passwordHash String
+  avatar       String?
+  bio          String?  @db.VarChar(300)
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  watchlist    UserAnime[]
+  favorites    Favorite[]
+  reviews      Review[]
+}
+
+// ======================================
+// ANIME
+// ======================================
+
+model Anime {
+  id           String   @id @default(uuid()) @db.Uuid
+
+  source       String?
+  sourceId     String?
+
+  title        String
+  titleNative  String?
+  description  String?  @db.Text
+
+  coverImage   String?
+  bannerImage  String?
+
+  format       String?
+  status       String?
+  episodes     Int?
+  duration     Int?
+
+  season       String?
+  seasonYear   Int?
+
+  averageScore Float?
+  popularity   Int?
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  watchlist    UserAnime[]
+  favorites    Favorite[]
+  reviews      Review[]
+  genres       AnimeGenre[]
+
+  @@unique([source, sourceId])
+  @@index([title])
+  @@index([seasonYear])
+}
+
+// ======================================
+// USER ANIME / WATCHLIST
+// ======================================
+
+model UserAnime {
+  id          String      @id @default(uuid()) @db.Uuid
+  userId      String      @db.Uuid
+  animeId     String      @db.Uuid
+
+  status      WatchStatus @default(PLANNING)
+  progress    Int         @default(0)
+  score       Int?
+
+  startedAt   DateTime?
+  completedAt DateTime?
+
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  anime       Anime       @relation(fields: [animeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, animeId])
+  @@index([userId, status])
+  @@index([animeId])
+}
+
+// ======================================
+// FAVORITE
+// ======================================
+
+model Favorite {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @db.Uuid
+  animeId   String   @db.Uuid
+
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  anime     Anime    @relation(fields: [animeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, animeId])
+  @@index([animeId])
+}
+
+// ======================================
+// REVIEW
+// ======================================
+
+model Review {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @db.Uuid
+  animeId   String   @db.Uuid
+
+  title     String   @db.VarChar(150)
+  content   String   @db.Text
+  isSpoiler Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  anime     Anime    @relation(fields: [animeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, animeId])
+  @@index([animeId, createdAt])
+}
+
+// ======================================
+// GENRE
+// ======================================
+
+model Genre {
+  id    String        @id @default(uuid()) @db.Uuid
+  name  String        @unique @db.VarChar(50)
+  slug  String        @unique @db.VarChar(60)
+
+  anime AnimeGenre[]
+}
+
+// ======================================
+// ANIME GENRE
+// ======================================
+
+model AnimeGenre {
+  animeId String @db.Uuid
+  genreId String @db.Uuid
+
+  anime   Anime  @relation(fields: [animeId], references: [id], onDelete: Cascade)
+  genre   Genre  @relation(fields: [genreId], references: [id], onDelete: Cascade)
+
+  @@id([animeId, genreId])
+  @@index([genreId])
+}
