@@ -16,6 +16,7 @@ enum WatchStatus {
   WATCHING
   COMPLETED
   PLANNING
+  PAUSED
   DROPPED
 }
 
