@@ -1,7 +1,10 @@
 import Head from "next/head";
 import AnimeList from "../components/AnimeList";
 import Header from "@/components/AnimeList/Header";
+import HeroSection from "@/components/AnimeDetail/HeroSection";
 import AiringList from "@/components/AnimeDetail/AiringList";
+
+export const dynamic = "force-dynamic";
 
 const QUERY = `
 query {

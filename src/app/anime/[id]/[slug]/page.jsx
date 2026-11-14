@@ -25,8 +25,6 @@ const Page = async ({ params }) => {
       {/* === MAIN CONTENT === */}
       <div className="w-full px-12 sm:px-16 lg:px-24">
         <div className="flex flex-col lg:flex-row gap-8">
-
-          {/* LEFT COL : poster & info table */}
           <div className="w-full -mt-24 w-32 shrink-0 sm:-mt-24 sm:w-40 lg:-mt-32 lg:w-48 z-10 space-y-4"> 
             {/* poster */}
             <div className="relative aspect-[3/4] overflow-hidden shadow-2xl ">

@@ -1,6 +1,6 @@
 "use client"
 
-const Pagination = ({ page, lastPage, setPage}) => {
+const Pagination = ({ page, lastPage, setPage, hasNextPage}) => {
     const scrollTop = () => {
         scrollTo({
             behavior: "smooth",
@@ -25,9 +25,9 @@ const Pagination = ({ page, lastPage, setPage}) => {
                     Prev
                 </button>
             }
-            <p>{page} of {lastPage}</p>
+            <p>${lastPage !== undefined ? `${page} of ${lastPage}`: page}</p>
 
-            {page >= lastPage ? null :
+            {(hasNextPage !== undefined ? `${page} of ${lastPage}`: page) ? null :
                 <button onClick={handleNext} className="transition-all hover:text-accent">
                     Next
                 </button>

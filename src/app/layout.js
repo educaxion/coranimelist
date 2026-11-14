@@ -2,6 +2,7 @@ import { Plus_Jakarta_Sans, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import { AuthProvider } from "@/context/AuthContext";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -24,11 +25,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${plusJakarta.variable} ${poppins.variable} flex flex-col min-h-screen`}>
-        <Navbar/>
-
-        {children}
-        
-        <Footer/>
+        <AuthProvider>
+          <Navbar/>
+          <main className="flex-grow"> 
+            {children}
+          </main>
+          <Footer/>
+        </AuthProvider>
       </body>
     </html>
   );

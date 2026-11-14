@@ -1,15 +1,40 @@
-import { Body, Controller, Delete, Get, Patch, Post, Param, ParseUUIDPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Patch,
+  Post,
+  Param,
+  ParseUUIDPipe,
+  Query,
+} from '@nestjs/common';
+
 import { AnimeService } from './anime.service.js';
+import { AniListService } from './anilist.service.js';
 import { CreateAnimeDto } from './dto/create-anime.dto.js';
 import { UpdateAnimeDto } from './dto/update-anime.dto.js';
+import { SearchAnimeDto } from './dto/search-anime.dto.js';
 
 @Controller('anime')
 export class AnimeController {
-  constructor(private readonly animeService: AnimeService) {}
+  constructor(
+    private readonly animeService: AnimeService,
+    private readonly aniListService: AniListService,
+  ) {}
 
   @Get()
   findAll() {
     return this.animeService.findAll();
+  }
+
+  @Get('search')
+  searchAnime(@Query() searchAnimeDto: SearchAnimeDto) {
+    return this.aniListService.searchAnime(
+      searchAnimeDto.query,
+      searchAnimeDto.page,
+      searchAnimeDto.perPage,
+    );
   }
 
   @Get(':id')

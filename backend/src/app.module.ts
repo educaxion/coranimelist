@@ -4,6 +4,8 @@ import { PrismaModule } from './prisma/prisma.module.js';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { AnimeModule } from './anime/anime.module.js';
+import { UsersModule } from './users/user.module.js';
+import { AuthModule } from './auth/auth.module.js';
 
 @Module({
   imports: [
@@ -12,6 +14,8 @@ import { AnimeModule } from './anime/anime.module.js';
     }),
     PrismaModule,
     AnimeModule,
+    UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
