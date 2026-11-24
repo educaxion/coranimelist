@@ -29,7 +29,7 @@ const AnimeCharacters = ({ characters }) => {
                                 </div>
                                 <div>
                                     <h4 className="text-xs sm:text-sm font-semibold text-text">{node.name.full}</h4>
-                                    <span className="text-xs text-sub">{role}</span>
+                                    <span className="text-xs text-text/50">{role}</span>
                                 </div>
                             </div>
                             
@@ -38,7 +38,7 @@ const AnimeCharacters = ({ characters }) => {
                                 <div className="flex items-center gap-3 text-right">
                                     <div>
                                         <h4 className="text-xs sm:text-sm font-semibold text-text">{va.name.full}</h4>
-                                        <span className="text-xs text-sub">Japanese</span>
+                                        <span className="text-xs text-text/50">Japanese</span>
                                     </div>
                                     <div className="relative w-16 h-20 shrink-0">
                                         {va.image?.large && (

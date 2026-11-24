@@ -10,7 +10,6 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 's4.anilist.co',
-        pathname: '/file/anilistcdn/media/**',
       },
     ],
   },

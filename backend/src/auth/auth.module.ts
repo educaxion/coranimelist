@@ -5,7 +5,7 @@ import { UsersModule } from "../users/user.module.js";
 import { AuthController } from './auth.controller.js';
 import { AuthService } from "./auth.service.js";
 import { JwtAuthGuard } from "./guards/jwt-auth.guard.js";
-import { UsersController } from "../users/user-.controller.js";
+import { UsersController } from "../users/user.controller.js";
 
 @Module({
     imports: [UsersModule, JwtModule.registerAsync({

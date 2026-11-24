@@ -1,6 +1,6 @@
+import NotFound from "@/app/not-found";
 import AnimeList from "@/components/AnimeList";
 import Header from "@/components/AnimeList/Header";
-import Pagination from "@/components/Utilities/Pagination";
 
 const Page = async ({ params, searchParams }) => {
     const { keyword } = await params
@@ -34,7 +34,7 @@ const Page = async ({ params, searchParams }) => {
           {searchAnime.length > 0 ? (
             <AnimeList list={searchAnime}/>
           ) : (
-            <p>{notFound}</p>
+            <NotFound/>
           )}
         </section>
       </>

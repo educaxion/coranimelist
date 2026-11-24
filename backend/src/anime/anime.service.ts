@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma.service.js';
 import { CreateAnimeDto } from './dto/create-anime.dto.js';
 import { UpdateAnimeDto } from './dto/update-anime.dto.js';
+import { SyncAnimeDto } from './dto/sync-anime.dto.js';
 
 @Injectable()
 export class AnimeService {
@@ -47,6 +48,43 @@ export class AnimeService {
 
     return this.prisma.anime.delete({
       where: { id },
+    })
+  }
+
+  async findOrCreate(syncAnimeDto: SyncAnimeDto) {
+    const { sourceId, ...animeData } = syncAnimeDto
+
+    return this.prisma.anime.upsert({
+      where: {
+        source_sourceId: {
+          source: 'ANILIST',
+          sourceId
+        },
+      },
+      create: {
+        ...animeData,
+        source: 'ANILIST',
+        sourceId
+      },
+      update: animeData
+    })
+  }
+
+  async findReviews(id: string) {
+    await this.findOne(id)
+
+    return this.prisma.review.findMany({
+      where: {animeId: id},
+      orderBy: {createdAt: 'desc'},
+      include: {
+        user: {
+          select: {
+            id: true,
+            username: true,
+            avatar: true
+          }
+        }
+      }
     })
   }
 }

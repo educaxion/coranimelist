@@ -2,10 +2,12 @@ import { getAnimeResponse } from "@/libs/api-libs"
 import { ANIME_DETAIL_QUERY } from "@/graphql/anime-detail-queries"
 import Image from "next/image"
 import { notFound } from "next/navigation"
+import AnimeWatch from "@/components/AnimeDetail/AnimeWatch"
 import AnimeInfo from "@/components/AnimeDetail/AnimeInformation"
 import AnimeSynopsis from "@/components/AnimeDetail/AnimeSynopsis"
 import AnimeTrailer from "@/components/AnimeDetail/AnimeTrailer"
 import AnimeCharacters from "@/components/AnimeDetail/AnimeCharacters"
+import AnimeReview from "@/components/AnimeDetail/AnimeReview"
 
 const Page = async ({ params }) => {
   const { id } = await params
@@ -25,13 +27,16 @@ const Page = async ({ params }) => {
       {/* === MAIN CONTENT === */}
       <div className="w-full px-12 sm:px-16 lg:px-24">
         <div className="flex flex-col lg:flex-row gap-8">
-          <div className="w-full -mt-24 w-32 shrink-0 sm:-mt-24 sm:w-40 lg:-mt-32 lg:w-48 z-10 space-y-4"> 
+          <div className="-mt-24 w-40 shrink-0 sm:-mt-24 sm:w-40 lg:-mt-32 lg:w-48 z-10 space-y-4"> 
             {/* poster */}
-            <div className="relative aspect-[3/4] overflow-hidden shadow-2xl ">
+            <div className="relative aspect-3/4 overflow-hidden shadow-2xl ">
               {anime.coverImage?.large && (
                 <Image src={anime.coverImage.large} alt="poster" fill priority sizes="(max-width: 640px) 144px, (max-width: 1024px) 224px, 240px" className="object-cover"/>
               )}
             </div>
+            
+            <AnimeWatch anime={anime}/>
+
             <AnimeInfo anime={anime}/>
           </div>
               
@@ -50,13 +55,10 @@ const Page = async ({ params }) => {
             <AnimeTrailer trailer={anime.trailer}/>
 
             <AnimeCharacters characters={anime.characters}/>
+
+            <AnimeReview anime={anime}/>
           </div>
         </div>
-
-        
-      </div>
-
-      <div>
       </div>
     </div>
     </>

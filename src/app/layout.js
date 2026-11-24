@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
       <body className={`${plusJakarta.variable} ${poppins.variable} flex flex-col min-h-screen`}>
         <AuthProvider>
           <Navbar/>
-          <main className="flex-grow"> 
+          <main className="flex grow"> 
             {children}
           </main>
           <Footer/>

@@ -15,6 +15,8 @@ import { AniListService } from './anilist.service.js';
 import { CreateAnimeDto } from './dto/create-anime.dto.js';
 import { UpdateAnimeDto } from './dto/update-anime.dto.js';
 import { SearchAnimeDto } from './dto/search-anime.dto.js';
+import { SyncAnimeDto } from './dto/sync-anime.dto.js';
+import { parse } from 'path';
 
 @Controller('anime')
 export class AnimeController {
@@ -58,5 +60,17 @@ export class AnimeController {
   @Post()
   create(@Body() createAnimeDto: CreateAnimeDto) {
     return this.animeService.create(createAnimeDto);
+  }
+
+  @Post('sync')
+  syncAnime(@Body() syncAnimeDto: SyncAnimeDto) {
+    return this.animeService.findOrCreate(syncAnimeDto)
+  }
+
+  @Get(':id/reviews')
+  findReviews(
+    @Param('id', ParseUUIDPipe) id:string
+  ) {
+    return this.animeService.findReviews(id)
   }
 }

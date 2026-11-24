@@ -24,7 +24,7 @@ const InputSearch = () => {
                 <input 
                 type="text"
                 placeholder="Search Anime..." 
-                className="text-text bg-[#040021] p-2 rounded w-full min-w-64"
+                className="text-text bg-[#040021] p-2 rounded w-full min-w-64 focus:outline-none"
                 ref={searchRef}
                 onKeyDown={handleSearch}
             />

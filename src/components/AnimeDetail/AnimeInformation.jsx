@@ -11,70 +11,70 @@ const AnimeInfo = ({ anime }) => {
             {/* format */}
             <div>
                 <h4 className="text-xs font-semibold text-text uppercase tracking-wider">Format</h4>
-                <p className="text-sub mt-0.5">{anime?.format || "N/A"}</p>
+                <p className="text-text/50 mt-0.5">{anime?.format || "N/A"}</p>
             </div>
 
             {/* episodes */}
             <div>
                 <h4 className="text-xs font-semibold text-text uppercase tracking-wider">Episodes</h4>
-                <p className="text-sub mt-0.5">{anime?.episodes || "N/A"}</p>
+                <p className="text-text/50 mt-0.5">{anime?.episodes || "N/A"}</p>
             </div>
 
             {/* episode duration */}
             {anime?.duration && (
             <div>
                 <h4 className="text-xs font-semibold text-text uppercase tracking-wider">Episode Duration</h4>
-                <p className="text-sub mt-0.5">{anime.duration} MINS</p>
+                <p className="text-text/50 mt-0.5">{anime.duration} MINS</p>
             </div>
             )}
 
             {/*=== status ===*/}
             <div>
                 <h4 className="text-xs font-semibold text-text uppercase tracking-wider">Status</h4>
-                <p className="text-sub mt-0.5">{anime?.status}</p>
+                <p className="text-text/50 mt-0.5">{anime?.status}</p>
             </div>
 
             {/* start date */}
             <div>
                 <h4 className="text-xs font-semibold text-text uppercase tracking-wider">Release Date</h4>
-                <p className="text-sub mt-0.5">{formatDate(anime?.startDate)}</p>
+                <p className="text-text/50 mt-0.5">{formatDate(anime?.startDate)}</p>
             </div>
 
             {/* season */}
             {anime?.season && (
             <div>
                 <h4 className="text-xs font-semibold text-text uppercase tracking-wider">Season</h4>
-                <p className="text-sub mt-0.5">{anime?.season} {anime?.seasonYear}</p>
+                <p className="text-text/50 mt-0.5">{anime?.season} {anime?.seasonYear}</p>
             </div>
             )}
             {/*=== average score ==== */}
             <div>
                 <h4 className="text-xs font-semibold text-text uppercase tracking-wider">Average Score</h4>
-                <p className="text-sub mt-0.5">{anime?.averageScore ? `${anime.averageScore}%` : "N/A"}</p>
+                <p className="text-text/50 mt-0.5">{anime?.averageScore ? `${anime.averageScore}%` : "N/A"}</p>
             </div>
 
             {/*=== mean score ==== */}
             <div>
                 <h4 className="text-xs font-semibold text-text uppercase tracking-wider">Mean Score</h4>
-                <p className="text-sub mt-0.5">{anime?.meanScore ? `${anime.meanScore}%` : "N/A"}</p>
+                <p className="text-text/50 mt-0.5">{anime?.meanScore ? `${anime.meanScore}%` : "N/A"}</p>
             </div>
 
             {/* studios */}
             <div>
                 <h4 className="text-xs font-semibold text-text uppercase tracking-wider">Studios</h4>
-                <p className="text-sub mt-0.5">{studios}</p>
+                <p className="text-text/50 mt-0.5">{studios}</p>
             </div>
             
             {/* Source */}
             <div>
                 <h4 className="text-xs font-semibold text-text uppercase tracking-wider">Source</h4>
-                <p className="text-sub mt-0.5">{anime?.source || "N/A"}</p>
+                <p className="text-text/50 mt-0.5">{anime?.source || "N/A"}</p>
             </div>
 
             {/* Hashtag */}
             <div>
                 <h4 className="text-xs font-semibold text-text uppercase tracking-wider">Hashtag</h4>
-                <p className="text-sub mt-0.5">{anime?.hashtag || "N/A"}</p>
+                <p className="text-text/50 mt-0.5">{anime?.hashtag || "N/A"}</p>
             </div>
             
             {/* Genres */}
@@ -94,19 +94,19 @@ const AnimeInfo = ({ anime }) => {
                 {anime?.title?.romaji && (
                 <div>
                     <h4 className="text-xs font-semibold text-text uppercase tracking-wider">Romaji</h4>
-                    <p className="text-sub mt-0.5">{anime.title.romaji}</p>
+                    <p className="text-text/50 mt-0.5">{anime.title.romaji}</p>
                 </div>
                 )}
                 {anime?.title?.english && (
                 <div>
                     <h4 className="text-xs font-semibold text-text uppercase tracking-wider">English</h4>
-                    <p className="text-sub mt-0.5">{anime.title.english}</p>
+                    <p className="text-text/50 mt-0.5">{anime.title.english}</p>
                 </div>
                 )}
                 {anime?.title?.native && (
                 <div>
                     <h4 className="text-xs font-semibold text-text uppercase tracking-wider">Native</h4>
-                    <p className="text-sub mt-0.5">{anime.title.native}</p>
+                    <p className="text-text/50 mt-0.5">{anime.title.native}</p>
                 </div>
                 )}
             </div>

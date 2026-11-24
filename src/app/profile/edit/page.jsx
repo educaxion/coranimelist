@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -34,14 +33,12 @@ export default function ProfileEditPage() {
 
   const avatarInputRef = useRef(null);
 
-  // Redirect jika belum login
   useEffect(() => {
     if (!loading && !user) {
       router.replace("/login");
     }
   }, [loading, user, router]);
 
-  // Mengisi form berdasarkan data user
   useEffect(() => {
     if (user) {
       setForm({
@@ -54,7 +51,6 @@ export default function ProfileEditPage() {
     }
   }, [user]);
 
-  // Membersihkan object URL
   useEffect(() => {
     return () => {
       if (avatarPreview) {
@@ -92,7 +88,6 @@ export default function ProfileEditPage() {
     form.password !== "" ||
     !!avatarFile;
 
-  // Mengubah input form
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -102,7 +97,6 @@ export default function ProfileEditPage() {
     }));
   };
 
-  // Logout
   const handleLogout = async () => {
     try {
       await logout();
@@ -115,7 +109,6 @@ export default function ProfileEditPage() {
     }
   };
 
-  // Memilih avatar
   const handlePickImage = (e) => {
     const file = e.target.files?.[0];
     e.target.value = "";
@@ -143,7 +136,6 @@ export default function ProfileEditPage() {
     setAvatarPreview(URL.createObjectURL(file));
   };
 
-  // Membatalkan perubahan
   const handleCancel = () => {
     setForm({
       username: user.username || "",
@@ -354,18 +346,8 @@ export default function ProfileEditPage() {
   return (
     <main className="w-auto min-h-screen bg-primary text-text px-5 py-10">
       <div className="max-w-6xl mx-auto">
-        {/* Back Button */}
-        <button
-          type="button"
-          onClick={() => router.push("/profile")}
-          className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-lg bg-secondary hover:bg-secondary/70 border border-white/10 text-sm font-semibold text-text transition"
-        >
-          <span>←</span>
-          Back to Profile
-        </button>
-
         <h1 className="text-3xl font-semibold mb-8">
-          Settings
+          Edit Profile
         </h1>
 
         <form
@@ -375,7 +357,7 @@ export default function ProfileEditPage() {
           {/* LEFT: Profile Photo */}
           <aside>
             <div className="flex flex-col items-center lg:items-start gap-3">
-              <div className="w-40 h-40 rounded-xl overflow-hidden bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center text-6xl font-bold text-text">
+              <div className="w-40 h-40 rounded-xl overflow-hidden bg-accent flex items-center justify-center text-6xl font-bold text-text">
                 {avatarSrc ? (
                   <img
                     src={avatarSrc}
@@ -390,7 +372,7 @@ export default function ProfileEditPage() {
               <button
                 type="button"
                 onClick={() => avatarInputRef.current?.click()}
-                className="px-4 py-2 rounded-lg bg-secondary hover:bg-secondary/70 border border-white/10 text-sm font-semibold transition"
+                className="px-4 py-2 rounded-lg bg-accent hover:bg-accent-hover text-sm font-semibold transition"
               >
                 Change Photo
               </button>
@@ -407,18 +389,11 @@ export default function ProfileEditPage() {
                 onChange={handlePickImage}
               />
             </div>
-
-            <button
-              type="button"
-              onClick={handleLogout}
-              className="mt-8 w-full px-5 py-2.5 text-text bg-accent hover:bg-accent-hover transition font-semibold text-sm"
-            >
-              Logout
-            </button>
           </aside>
 
           {/* RIGHT: Profile Information */}
-          <section className="bg-secondary rounded-xl p-6 md:p-8 space-y-8 h-fit">
+          <div className="flex flex-col gap-4 w-full">
+          <section className="bg-secondary p-6 md:p-8 space-y-8 h-fit">
             {/* Username */}
             <div>
               <label htmlFor="username" className={labelClass}>
@@ -506,8 +481,7 @@ export default function ProfileEditPage() {
               </div>
 
               <p className="text-sm text-text/50 mt-3">
-                Kosongkan jika tidak ingin mengganti password.
-                Minimal 8 karakter.
+                At least 8 characters.
               </p>
             </div>
 
@@ -518,7 +492,7 @@ export default function ProfileEditPage() {
 
             {/* Message + Buttons */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <div className="min-h-[1.25rem]">
+              <div className="min-h-5">
                 {message && (
                   <p
                     className={`text-sm ${
@@ -552,6 +526,14 @@ export default function ProfileEditPage() {
               </div>
             </div>
           </section>
+          <button
+              type="button"
+              onClick={handleLogout}
+              className="ml-auto px-6 py-4 rounded-2xl text-text bg-accent hover:bg-accent-hover transition font-semibold text-sm text-center"
+            >
+              Logout
+            </button>
+          </div>
         </form>
       </div>
     </main>

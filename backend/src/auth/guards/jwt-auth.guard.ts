@@ -1,7 +1,6 @@
 import { Injectable, CanActivate, ExecutionContext, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import type { Request } from "express";
-import { Observable } from "rxjs";
 
 interface AuthenticatedRequest extends Request {
     user: {
@@ -16,10 +15,7 @@ export class JwtAuthGuard implements CanActivate {
     
     async canActivate(context: ExecutionContext): Promise<boolean> {
         const request = context.switchToHttp().getRequest<AuthenticatedRequest>()
-
         const token = request.cookies?.access_token
-        console.log('RAW COOKIE:', request.headers.cookie);
-        console.log('PARSED COOKIES:', request.cookies);
         
         if(!token) {
             throw new UnauthorizedException("Authentication Required")

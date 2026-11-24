@@ -15,11 +15,11 @@ const AiringList = ({ list }) => {
                     <Link
                         key={anime.id}
                         href={`/anime/${anime.id}/${slug}`}
-                        className="group flex items-center justify-between bg-slate-900/60 hover:bg-slate-800/80 border border-white/5 hover:border-white/10 p-3 sm:p-4 gap-4 transition duration-300"
+                        className="group flex items-center justify-between bg-slate-900/60 hover:bg-accent/400 p-3 sm:p-4 gap-4 transition duration-300"
                     >
                         <div className="flex items-center gap-4 sm:gap-6 min-w-0 flex-1">
                             {/* ranking number */}
-                            <span className="text-lg sm:text-2xl font-bold text-sub w-8 sm:w-10 text-center shrink-0">#{index + 1}</span>
+                            <span className="text-lg sm:text-2xl font-bold text-text/50 w-8 sm:w-10 text-center shrink-0">#{index + 1}</span>
 
                             {/* poster */}
                             <div className="relative w-12 h-16 sm:w-16 sm:h-20 shrink-0 overflow-hidden shadow-md">
