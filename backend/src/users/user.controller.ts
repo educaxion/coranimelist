@@ -19,7 +19,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
 import { UpdateProfileDto } from '../anime/dto/update-profile.dto.js';
 import { UpdatePasswordDto } from '../anime/dto/update-password.dto.js';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { updateWatchlistStatusDto } from '../auth/dto/update-watclist-status.js';
+import { updateWatchlistStatusDto } from '../auth/dto/update-watchlist-status.js';
 import { CreateReviewDto } from '../anime/dto/create-review.dto.js';
 import type { UploadedAvatarFile } from '../storage/uploaded-avatar-file.type.js';
 

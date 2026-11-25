@@ -1,5 +1,5 @@
 import { Body, Controller, Post, Res, Get, Req, UseGuards } from "@nestjs/common";
-import type { Response } from 'express';
+import type { Request, Response } from 'express';
 import { AuthService } from "./auth.service.js";
 import { RegisterDto } from "./dto/register.dto.js";
 import { LoginDto } from "./dto/login.dto.js";
@@ -20,7 +20,7 @@ export class AuthController {
         res.cookie('access_token', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
             path: '/',
             maxAge: 24 * 60 * 60 * 1000
         })
@@ -67,7 +67,7 @@ export class AuthController {
         res.clearCookie('access_token', {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
             path: '/'
         })
 
