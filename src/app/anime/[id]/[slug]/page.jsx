@@ -14,42 +14,66 @@ const Page = async ({ params }) => {
   const data = await getAnimeResponse(ANIME_DETAIL_QUERY,{ id: Number(id) })
 
   const anime = data?.Media
+  
+  const mainTitle = anime.title?.english || anime.title?.romaji
+  const titleRomaji = anime.title?.romaji && anime.title?.english
+
   return (
     <>
-    <div className="min-h-screen flex flex-col gap-4">
+    <div className="w-full min-w-0 flex flex-col gap-4 pb-10">
       {/* banner */}
-      <div className="relative w-full h-40 sm:h-48 lg:h-64 overflow-hidden">
+      <div className="relative w-full h-32 sm:h-48 lg:h-64 overflow-hidden">
         {anime.bannerImage && (
-          <Image src={anime.bannerImage} alt="banner" fill priority sizes="100vw" className="object-cover object-center"/>
+          <Image 
+            src={anime.bannerImage} 
+            alt="banner" 
+            fill 
+            priority 
+            sizes="100vw" 
+            className="object-cover object-center"/>
         )}
       </div>
       
       {/* === MAIN CONTENT === */}
-      <div className="w-full px-12 sm:px-16 lg:px-24">
-        <div className="flex flex-col lg:flex-row gap-8">
-          <div className="-mt-24 w-40 shrink-0 sm:-mt-24 sm:w-40 lg:-mt-32 lg:w-48 z-10 space-y-4"> 
-            {/* poster */}
-            <div className="relative aspect-3/4 overflow-hidden shadow-2xl ">
-              {anime.coverImage?.large && (
-                <Image src={anime.coverImage.large} alt="poster" fill priority sizes="(max-width: 640px) 144px, (max-width: 1024px) 224px, 240px" className="object-cover"/>
+      <div className="w-full min-w-0 px-4 sm:px-8 lg:px-16">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+          {/* sidebar */}
+          <aside className="w-full min-w-0 lg:w-52 lg:shrink-0 space-y-4">
+            <div className="relative flex items-start gap-4 -mt-14 sm:-mt-20 lg:-mt-32 z-10"> 
+              {/* mobile */}
+              <div className="relative w-28 sm:w-36 lg:w-full shrink-0 aspect-3/4 overflow-hidden shadow-2xl ">
+                {anime.coverImage?.large && (
+                  <Image src={anime.coverImage.large} alt="poster" fill priority sizes="(max-width: 640px) 144px, (max-width: 1024px) 224px, 240px" className="object-cover"/>
+                )}
+              </div>
+
+              <div className="min-w-0 flex-1 pt-[3.5rem] sm:pt-[6.5rem] lg:hidden">
+                <h1 className="text-lg sm:text-2xl font-semibold leading-tight line-clamp-3">
+                  {mainTitle}
+                </h1>
+                {titleRomaji && (
+                  <p className="mt-1 text-xs sm:text-sm text-text/70 line-clamp-2">
+                    {anime.title.romaji}
+                  </p>
+                )}
+              </div>
+            </div>   
+              <AnimeWatch anime={anime}/>
+              <AnimeInfo anime={anime}/>
+          </aside>
+              
+          {/* DESKTOP */}
+          <div className="min-w-0 flex-1 space-y-6">
+            <div className="hidden lg:block">
+              <h1 className="text-3xl font-semibold leading-tight">
+                  {mainTitle}
+              </h1>
+              {titleRomaji && (
+                <p className="mt-1 text-xs sm:text-sm text-text/70 line-clamp-2">
+                  {titleRomaji}
+                </p>
               )}
             </div>
-            
-            <AnimeWatch anime={anime}/>
-
-            <AnimeInfo anime={anime}/>
-          </div>
-              
-           {/* title */}
-          <div className="min-w-0 flex-1">
-            <h1 className="text-3xl font-semibold leading-tight">
-                {anime.title.english || anime.title.romaji}
-            </h1>
-            {anime.title?.romaji && anime.title?.english && (
-              <p className="mt-1 text-sm text-text">
-                {anime.title.romaji}
-              </p>
-            )}
             <AnimeSynopsis anime={anime}/>
 
             <AnimeTrailer trailer={anime.trailer}/>

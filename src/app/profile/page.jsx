@@ -84,11 +84,11 @@ const Page = () => {
     return (
       <section>
         <div className="mx-auto px-5 md:px-8 mt-6">
-            <h1 className="text-text text-3xl font-semibold mb-4">
+            <h1 className="text-text text-2xl sm:text-3xl font-semibold mb-4">
                  My Profile
             </h1>
-            <div className="flex flex-col sm:flex-row justify-between gap-4 items-start">
-                <div className="w-40 h-40 overflow-hidden bg-accent flex items-center justify-center text-6xl font-semibold text-text shrink-0">
+            <div className="flex flex-col sm:flex-row justify-between gap-4 items-start sm:items-start">
+                <div className="w-32 h-32 sm:w-40 sm:h-40 overflow-hidden bg-accent flex items-center justify-center text-6xl font-semibold text-text shrink-0">
                     {user.avatar ? (
                         <img
                           src={user.avatar}
@@ -100,8 +100,8 @@ const Page = () => {
                     )}
                 </div>
 
-                <div className="flex-1 text-center sm:text-left">
-                    <h2 className="text-2xl md:text-4xl text-text font-semibold leading-none align-top">
+                <div className="flex-1 min-w-0 text-center sm:text-left">
+                    <h2 className="text-xl sm:text-2xl md:text-4xl text-text text-left font-semibold leading-none align-top">
                         {user.username || "Username"}
                     </h2>
                     <p className="text-text/70 text-sm mt-2 max-w-md">

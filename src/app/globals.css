@@ -17,8 +17,7 @@ body {
 @theme {
   --color-primary: #080714;
   --color-secondary: #100E20;
-  --color-card: #171528;
-  --color-surface: #211E35;
+  --color-box: #040021;
 
   --color-accent: #D62945;
   --color-accent-hover: #950b22;

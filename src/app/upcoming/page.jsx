@@ -8,13 +8,15 @@ const Page = () => {
   const [page, setPage] = useState(1)
   const [upcomingAnime, setUpcomingAnime] = useState([])
   const [lastPage, setLastPage] = useState(1)
- 
+  const [hasNextPage, setHasNextPage] = useState(false)
+  
   const fetchData = async() => {
     const query = `
       query ($page: Int) {
         Page(page: $page, perPage: 24) {
           pageInfo {
             lastPage
+            hasNextPage
           }
           media(sort: POPULARITY_DESC, status: NOT_YET_RELEASED, type: ANIME) {
             id
@@ -35,6 +37,7 @@ const Page = () => {
     const data = await response.json();
       setUpcomingAnime(data.data.Page.media)
       setLastPage(data.data.Page.pageInfo.lastPage)
+      setHasNextPage(data.data.Page.pageInfo.hasNextPage)
   }
 
   useEffect(() => {
@@ -45,7 +48,7 @@ const Page = () => {
     <div>
       <HeaderMenu title={`Anime Upcoming #${page}`}/>
       <AnimeList list={upcomingAnime}/>
-      <Pagination page={page} lastPage={lastPage} setPage={setPage}/>
+      <Pagination page={page} lastPage={lastPage} setPage={setPage} hasNextPage={hasNextPage}/>
     </div>
   )
 }

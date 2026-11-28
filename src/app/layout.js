@@ -18,8 +18,13 @@ const poppins = Poppins({
 
 export const metadata = {
   title: "CoranimeList",
-  description: "All About Anime!",
+  description: "Anime Rating Platform",
 };
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+}
 
 export default function RootLayout({ children }) {
   return (
@@ -27,7 +32,7 @@ export default function RootLayout({ children }) {
       <body className={`${plusJakarta.variable} ${poppins.variable} flex flex-col min-h-screen`}>
         <AuthProvider>
           <Navbar/>
-          <main className="flex grow"> 
+          <main className="grow w-full min-w-0"> 
             {children}
           </main>
           <Footer/>

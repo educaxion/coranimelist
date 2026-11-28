@@ -11,7 +11,7 @@ const WatchlistTabs = ({ watchlist = []}) => {
     }
 
     return (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-5 gap-y-8">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-5 gap-y-8">
             {watchlist.map((item) => {
                 const anime = item.anime;
 
@@ -33,11 +33,11 @@ const WatchlistTabs = ({ watchlist = []}) => {
                             />
                         </div>
 
-                        <h3 className="text-text text-sm font-semibold mt-2 line-clamp-2 group-hover:text-accent transition">
+                        <h3 className="text-text text-xs sm:text-base leading-snug font-semibold mt-2 line-clamp-2 group-hover:text-accent transition">
                             {anime.title}
                         </h3>
 
-                        <p className="text-text/50 text-xs mt-1">
+                        <p className="text-text/50 text-[10px] sm:text-sm mt-1">
                             {item.status}
                         </p>
                     </Link>                    

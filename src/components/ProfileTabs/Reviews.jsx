@@ -27,7 +27,7 @@ const ReviewTabs = ({ reviews = []}) => {
                         {/** Anime Poster */}
                         <Link
                             href={`/anime/${anime.sourceId}/${slug}`}
-                            className="w-24 sm:w-28 shrink-0 "
+                            className="w-16 sm:w-24 shrink-0 "
                         >
                             <div className="aspect-3/4 overflow-hidden">
                                 <img
@@ -42,21 +42,21 @@ const ReviewTabs = ({ reviews = []}) => {
                         <div className="flex-1 min-w-0 gap-4">
                             <Link
                                 href={`/anime/${anime.sourceId}/${slug}`}
-                                className="text-text text-xl font-semibold"
+                                className="text-text text-md sm:text-xl font-semibold"
                             >
                                 {anime.title}
                             </Link>
 
                             {anime.seasonYear && (
-                                <span className="text-sub ml-2">
+                                <span className="text-text/50 ml-2 text-sm">
                                     {anime.seasonYear}
                                 </span>
                             )}
-                            <p className="text-text/50 text-sm">
+                            <p className="text-text/50 text-xs sm:text-sm">
                                 Your review
                             </p>
                             
-                            <p className="text-text/80 text-xs mt-4">
+                            <p className="text-text/80 text-[10px] sm:text-xs mt-4">
                                 {item.content}
                             </p>
                         </div>

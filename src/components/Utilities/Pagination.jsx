@@ -25,13 +25,13 @@ const Pagination = ({ page, lastPage, setPage, hasNextPage}) => {
                     Prev
                 </button>
             }
-            <p>${lastPage !== undefined ? `${page} of ${lastPage}`: page}</p>
+            <p>{lastPage !== undefined ? `${page} of ${lastPage}`: page}</p>
 
-            {(hasNextPage !== undefined ? `${page} of ${lastPage}`: page) ? null :
+            {hasNextPage ? (
                 <button onClick={handleNext} className="transition-all hover:text-accent">
                     Next
                 </button>
-            }
+            ): null}
         </div>
     )
 }

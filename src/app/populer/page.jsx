@@ -8,6 +8,7 @@ const Page = () => {
   const [page, setPage] = useState(1)
   const [topAnime, setTopAnime] = useState([])
   const [lastPage, setLastPage] = useState(1)
+  const [hasNextPage, setHasNextPage] = useState(false)
  
   const fetchData = async() => {
     const query = `
@@ -15,6 +16,7 @@ const Page = () => {
         Page(page: $page, perPage: 24) {
           pageInfo {
             lastPage
+            hasNextPage
           }
           media(sort: POPULARITY_DESC, type: ANIME) {
             id
@@ -35,6 +37,7 @@ const Page = () => {
     const data = await response.json();
       setTopAnime(data.data.Page.media)
       setLastPage(data.data.Page.pageInfo.lastPage)
+      setHasNextPage(data.data.Page.pageInfo.hasNextPage)
   }
 
   useEffect(() => {
@@ -42,10 +45,10 @@ const Page = () => {
   }, [page])
 
   return (
-    <div>
+    <div className='w-full min-w-0 px-4 sm:px-8 lg:px-16 py-6'>
       <HeaderMenu title={`Anime Populer #${page}`}/>
       <AnimeList list={topAnime}/>
-      <Pagination page={page} lastPage={lastPage} setPage={setPage}/>
+      <Pagination page={page} lastPage={lastPage} setPage={setPage} hasNextPage={hasNextPage}/>
     </div>
   )
 }

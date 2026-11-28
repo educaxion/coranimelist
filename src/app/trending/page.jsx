@@ -8,6 +8,8 @@ const Page = () => {
   const [page, setPage] = useState(1)
   const [topTrending, setTopTrending] = useState([])
   const [lastPage, setLastPage] = useState(1)
+  const [hasNextPage, setHasNextPage] = useState(false)
+  
  
   const fetchData = async() => {
     const query = `
@@ -15,6 +17,7 @@ const Page = () => {
         Page(page: $page, perPage: 24) {
           pageInfo {
             lastPage
+            hasNextPage
           }
           media(sort: TRENDING_DESC, type: ANIME) {
             id
@@ -35,6 +38,8 @@ const Page = () => {
     const data = await response.json();
       setTopTrending(data.data.Page.media)
       setLastPage(data.data.Page.pageInfo.lastPage)
+      setHasNextPage(data.data.Page.pageInfo.hasNextPage)
+
   }
 
   useEffect(() => {
@@ -45,7 +50,7 @@ const Page = () => {
     <div>
       <HeaderMenu title={`Anime Trending #${page}`}/>
       <AnimeList list={topTrending}/>
-      <Pagination page={page} lastPage={lastPage} setPage={setPage}/>
+      <Pagination page={page} lastPage={lastPage} setPage={setPage} hasNextPage={hasNextPage}/>
     </div>
   )
 }

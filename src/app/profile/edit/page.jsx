@@ -357,7 +357,7 @@ export default function ProfileEditPage() {
           {/* LEFT: Profile Photo */}
           <aside>
             <div className="flex flex-col items-center lg:items-start gap-3">
-              <div className="w-40 h-40 rounded-xl overflow-hidden bg-accent flex items-center justify-center text-6xl font-bold text-text">
+              <div className="w-40 h-40 overflow-hidden bg-accent flex items-center justify-center text-6xl font-bold text-text">
                 {avatarSrc ? (
                   <img
                     src={avatarSrc}
